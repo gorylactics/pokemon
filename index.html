@@ -14,8 +14,11 @@
     <!-- <button type="submit">Pokemon</button> -->
     <script>
         $(document).ready(function(){
+            
             for(var i = 1 ; i <= 898 ; i++){
-                let url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/`+i+`.png`;
+                let numero  = i;
+                //let url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/`+i+`.png`;
+                let url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${numero}.png`;
                 $('#contenedor').append(' <img src="'+ url +'" alt="">')
             };
         });
