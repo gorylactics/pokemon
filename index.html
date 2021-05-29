@@ -9,19 +9,36 @@
 </head>
 <body>
     <div id="contenedor">
-        
+        <div id="tarjeta"></div>
+        <div id="contenido"></div>
     </div>
-    <!-- <button type="submit">Pokemon</button> -->
     <script>
         $(document).ready(function(){
-            
-            for(var i = 1 ; i <= 898 ; i++){
-                let numero  = i;
-                //let url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/`+i+`.png`;
-                let url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${numero}.png`;
-                $('#contenedor').append(' <img src="'+ url +'" alt="">')
+            for(var i = 1 ; i <= 8 ; i++){
+                let url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${i}.png`;
+                let pokemon  = $('#tarjeta').append(`<img id="${i}" src="${url}" alt="">`);
             };
-        });
-    </script>
-</body>
-</html>
+            $('img').on('click' , function(){
+                $('#contenido').html("");
+                let elId = $(this).attr('id');
+                let api = `https://pokeapi.co/api/v2/pokemon/${elId}`;
+                $.get(api , function(resultado){
+                    let nombrePokemon = resultado.name;
+                    let pesoPokemon = resultado.weight;
+                    let pokemonAltura = resultado.height;
+                    
+                    $('#contenido').append(`<h2>El nombre del pokemon es: ${nombrePokemon}</h2>`);
+                    $('#contenido').append(`<h2>Su peso es: ${pesoPokemon}</h2>`);
+                    $('#contenido').append(`<h2>Su altura es: ${pokemonAltura}</h2>`);
+                    $('#contenido').append(`<h2>El tipo de este pokemon es: </h2>`)
+                    
+                    for(let poderes of resultado.types){
+                        let tipo = poderes.type.name;
+                        $('#contenido').append(`<ul><li>${tipo}<ul></li>`);
+                        }
+                    },'json');
+                });
+            });
+        </script>
+    </body>
+    </html>
