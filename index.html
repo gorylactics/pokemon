@@ -14,14 +14,17 @@
     </div>
     <script>
         $(document).ready(function(){
+            
             for(var i = 1 ; i <= 8 ; i++){
                 let url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${i}.png`;
                 let pokemon  = $('#tarjeta').append(`<img id="${i}" src="${url}" alt="">`);
             };
             $('img').on('click' , function(){
+                
                 $('#contenido').html("");
                 let elId = $(this).attr('id');
                 let api = `https://pokeapi.co/api/v2/pokemon/${elId}`;
+                
                 $.get(api , function(resultado){
                     let nombrePokemon = resultado.name;
                     let pesoPokemon = resultado.weight;
